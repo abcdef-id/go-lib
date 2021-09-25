@@ -1,0 +1,8 @@
+.DS_Store
+/.vscode
+/.idea
+/.scannerwork/
+/coverage.out
+
+# For Development Testing Only
+test.go

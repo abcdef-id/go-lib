@@ -13,6 +13,7 @@ import (
 func init() {
 	// set config based on env
 	LoadEnvVars()
+	OpenMySqlPool()
 	MongoConnect()
 }
 
