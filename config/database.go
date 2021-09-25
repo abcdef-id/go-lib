@@ -18,8 +18,8 @@ import (
 )
 
 var (
-	//DB DB
-	DB *gorm.DB
+	//MySqlDB MySqlDB
+	MySqlDB *gorm.DB
 	//Redis Redis
 	Redis *redis.Client
 	//Mgo Mgo
@@ -60,14 +60,14 @@ func LoadDBConfig(name string) Database {
 
 func OpenMySqlPool() {
 	if viper.Get("env") != "testing" {
-		DB = MysqlConnect("mysql")
+		MySqlDB = MysqlConnect("mysql")
 	} else {
-		DB = MysqlConnectTest("mysql")
+		MySqlDB = MysqlConnectTest("mysql")
 	}
 	pool := viper.Sub("database.mysql.pool")
-	DB.DB().SetMaxOpenConns(pool.GetInt("maxOpenConns"))
-	DB.DB().SetMaxIdleConns(pool.GetInt("maxIdleConns"))
-	DB.DB().SetConnMaxLifetime(pool.GetDuration("maxLifetime") * time.Second)
+	MySqlDB.DB().SetMaxOpenConns(pool.GetInt("maxOpenConns"))
+	MySqlDB.DB().SetMaxIdleConns(pool.GetInt("maxIdleConns"))
+	MySqlDB.DB().SetConnMaxLifetime(pool.GetDuration("maxLifetime") * time.Second)
 }
 
 // MysqlConnect connect to mysql using config name. return *gorm.DB incstance
